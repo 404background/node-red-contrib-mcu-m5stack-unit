@@ -1,0 +1,6 @@
+{
+	"modules": {
+		"m5stack_joystick": "./nodes/joystick/joystick"
+	},
+	"preload": "m5stack_joystick"
+}
