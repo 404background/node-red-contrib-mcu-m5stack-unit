@@ -1,0 +1,32 @@
+{
+  "name": "@background404/node-red-contrib-mcu-m5stck-unit",
+  "version": "0.0.1",
+  "description": "Node for M5Stack Unit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "node-red": {
+    "version": ">=1.3.7",
+    "nodes": {
+      "m5stack_joystick": "nodes/joystick/mcu_joystick.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/404background/node-red-contrib-mcu-m5stack-unit.git"
+  },
+  "keywords": [
+    "node-red",
+    "m5stack"
+  ],
+  "author": "background404",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/404background/node-red-contrib-mcu-m5stack-unit/issues"
+  },
+  "homepage": "https://github.com/404background/node-red-contrib-mcu-m5stack-unit#readme"
+}

@@ -1,0 +1,76 @@
+<script type="text/javascript">
+    RED.nodes.registerType('m5stack_joystick',{
+        category: 'M5',
+        color: '#FFFFFF',
+        defaults: {
+            name: {value:""},
+            options: { value:{ bus:"default" , address:"0x52"} },
+            moddable_manifest: {
+                value: {
+                    include: [
+                        {
+                            "git": "https://github.com/404background/node-red-contrib-mcu-m5stack-unit.git"
+                        }
+                    ]
+                }
+            }
+        },
+        inputs: 1,
+        outputs: 3,
+        outputLabels: function(i) {
+            return [
+                this._("X-axis"),
+                this._("Y-axis"),
+                this._("Z-axis")
+            ][i];
+        },
+        icon: "serial.svg",
+		align: "left",
+        paletteLabel: 'Joystick',
+        label: function() {
+            return this.name||"joystick"
+        },
+        oneditprepare: function() {
+			const io = { type:"I2C" }
+			$(`#button-group-io-bus`).on("click", function() {
+				mcuHelper.toggleIO(false, "io", io)
+			})			
+			$(`#button-group-io-pins`).on("click", function() {
+				mcuHelper.toggleIO(true, "io", io)
+			})			
+			const div = $("#node-mcu-rows")
+			mcuHelper.appendProperties.I2C(div, "io", io)
+			mcuHelper.toggleIO(false, "io", io)
+			mcuHelper.restoreProperties.I2C(this.options, "io", io)
+		},
+		oneditsave: function() {
+ 			const options = {}
+			mcuHelper.saveProperties.I2C(options, "io")
+			this.options = options
+		},
+    })
+</script>
+
+<script type="text/html" data-template-name="m5stack_joystick">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name"><br>
+    </div>
+    <div class="form-row">
+		<label>Options</label>
+		<span class="button-group">
+			<button type="button" class="red-ui-button toggle selected" id="button-group-io-bus">Bus</button><button type="button" class="red-ui-button toggle" id="button-group-io-pins">Pins</button>
+		</span>
+	</div>
+    <div id="node-mcu-rows">
+	</div>
+	<div class="form-row">
+		<div class="red-ui-help">
+			See the <a class="" href="https://419.ecma-international.org/#-10-io-classes-ic" target="_blank">ECMA-419 specification</a>.
+		</div>
+   </div>
+</script>
+
+<script type="text/html" data-help-name="m5stack_joystick">
+
+</script>
